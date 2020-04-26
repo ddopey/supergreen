@@ -327,7 +327,6 @@ window.addEventListener('resize', function() {
 });
 
 window.onload = function () {
-window.screen.orientation.lock('landscape');
   if(Number(localStorage.getItem('level')) > 1) {
      document.getElementById('startscreen').style.display = "block";
      document.getElementById("startscreen").innerText = `CLICK TO START LEVEL ${localStorage.getItem('level')}!`;
