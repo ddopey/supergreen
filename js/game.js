@@ -49,11 +49,13 @@ if (h < w) {
 	cellSide = h/25;
 	canvas.width = canvas.height = newcanvas.width = newcanvas.height = h;
 	canvas.style.left = newcanvas.style.left = (w - h)/2+"px";
+	canvas.style.top = newcanvas.style.top = 0;
 }
 else {
 	cellSide = w/25;
 	canvas.width = canvas.height = newcanvas.width = newcanvas.height = w;
 	canvas.style.top = newcanvas.style.top = (h - w)/2+"px";
+	canvas.style.left = newcanvas.style.left = 0;
 }
 
 //insert from beholder
@@ -280,33 +282,17 @@ function resize_window () {
   cellSide = h/25;
   canvas.width = canvas.height = newcanvas.width = newcanvas.height = h;
   canvas.style.left = newcanvas.style.left = (w - h)/2+"px";
+canvas.style.top = newcanvas.style.top = 0;
   }
   else {
     cellSide = w/25;
     canvas.width = canvas.height = newcanvas.width = newcanvas.height = w;
-    canvas.style.left = newcanvas.style.left = (h - w)/2+"px";
+    canvas.style.top = newcanvas.style.top = (h - w)/2+"px";
+canvas.style.left = newcanvas.style.left = 0;
   }
   ratio = cellSide/oldcell;
 
   Array.from(document.querySelectorAll('.text')).forEach(el => el.style.fontSize = cellSide + "px");
-
-  let font_size = 2 * ratio;
-
-  if(font_size > 2) {
-    font_size = 2;
-  }
-
-  document.getElementById('soundcontrol').style.fontSize = `${font_size}rem`;
-  document.getElementById('music').style.fontSize = `${font_size}rem`;
-  document.getElementById('rel').style.fontSize = `${font_size}rem`;
-  document.getElementById('winscreen').style.fontSize = `${font_size}rem`;
-  document.getElementById('startscreen').style.fontSize = `${font_size}rem`;
-  document.getElementById('life').style.fontSize = `${font_size}rem`;
-  document.getElementById('menu').style.fontSize = `${font_size}rem`;
-  document.getElementById('gamename').style.fontSize = `${font_size}rem`;
-  document.getElementById('winner').style.fontSize = `${font_size}rem`;
-
-
   game.arr_resize(obstacles, ratio);
   game.arr_resize(lava, ratio);
   game.arr_resize(portal, ratio);
