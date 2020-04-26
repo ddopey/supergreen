@@ -25,16 +25,16 @@
 
 	.screens {
 		position: absolute;
-	  margin: 25% 25% 25% 25%;
-	  width: 50%;
-	  height: 50%;
-	  display: none;
-	  font-family: Arial Black, Verdana, Times, serif, "Times New Roman";
-	  z-index: 100;
-	  color: white;
-	  font-weight: bold;
-	  text-align:center;
-	  font-size: 3rem;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: none;
+		font-family: Arial Black, Verdana, Times, serif, "Times New Roman";
+		z-index: 100;
+		color: white;
+		font-weight: bold;
+		text-align:center;
+		font-size: 3rem;
 	}
 
 	.words {
