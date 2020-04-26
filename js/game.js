@@ -53,7 +53,7 @@ if (h < w) {
 else {
 	cellSide = w/25;
 	canvas.width = canvas.height = newcanvas.width = newcanvas.height = w;
-	canvas.style.left = newcanvas.style.left = (h - w)/2+"px";
+	canvas.style.top = newcanvas.style.top = (h - w)/2+"px";
 }
 
 //insert from beholder
@@ -284,7 +284,7 @@ window.addEventListener('resize', function() {
   else {
     cellSide = w/25;
     canvas.width = canvas.height = newcanvas.width = newcanvas.height = w;
-    canvas.style.left = newcanvas.style.left = (h - w)/2+"px";
+    canvas.style.top = newcanvas.style.top = (h - w)/2+"px";
   }
   ratio = cellSide/oldcell;
 
