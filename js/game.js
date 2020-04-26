@@ -268,7 +268,7 @@ function reload() {
 	window.location.reload();
 }
 
-window.addEventListener('resize', function() {
+function resize_window () {
 
   const oldcell = cellSide;
   let ratio;
@@ -284,12 +284,12 @@ window.addEventListener('resize', function() {
   else {
     cellSide = w/25;
     canvas.width = canvas.height = newcanvas.width = newcanvas.height = w;
-    canvas.style.top = newcanvas.style.top = (h - w)/2+"px";
+    canvas.style.left = newcanvas.style.left = (h - w)/2+"px";
   }
   ratio = cellSide/oldcell;
-	
+
   Array.from(document.querySelectorAll('.text')).forEach(el => el.style.fontSize = cellSide + "px");
-	
+
   let font_size = 2 * ratio;
 
   if(font_size > 2) {
@@ -326,7 +326,11 @@ window.addEventListener('resize', function() {
   player.height *= ratio;
 
   game.draw_initial();
-});
+
+}
+
+window.addEventListener('resize', resize_window);
+window.addEventListener('orientationchange', resize_window);
 
 window.onload = function () {
 Array.from(document.querySelectorAll('.text')).forEach(el => el.style.fontSize = cellSide + "px");
