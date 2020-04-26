@@ -287,7 +287,9 @@ window.addEventListener('resize', function() {
     canvas.style.top = newcanvas.style.top = (h - w)/2+"px";
   }
   ratio = cellSide/oldcell;
-
+	
+  Array.from(document.querySelectorAll('.text')).forEach(el => el.style.fontSize = cellSide + "px");
+	
   let font_size = 2 * ratio;
 
   if(font_size > 2) {
@@ -327,6 +329,7 @@ window.addEventListener('resize', function() {
 });
 
 window.onload = function () {
+Array.from(document.querySelectorAll('.text')).forEach(el => el.style.fontSize = cellSide + "px");
   if(Number(localStorage.getItem('level')) > 1) {
      document.getElementById('startscreen').style.display = "block";
      document.getElementById("startscreen").innerText = `CLICK TO START LEVEL ${localStorage.getItem('level')}!`;
