@@ -900,6 +900,7 @@ game.animate = function () {
       {	  if(game.sounds) { document.getElementById('door').play(); }
 					canvas.style.display = "none";
 					newcanvas.style.display = "none";
+       					uppercanvas.style.display = "none";
           if(level <= max_levels) {
 					document.getElementById('winscreen').style.display = "block";
 					localStorage.setItem('level', (level + 1));
