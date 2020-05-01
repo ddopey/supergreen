@@ -18,6 +18,11 @@ canvas {
 	z-index: 105;
 }
 
+#uppercanvas {
+	z-index: 107;
+	display: none;
+}
+
 body {
 overflow:hidden;
 background-image: url(../assets/images/smalldirt.png);
