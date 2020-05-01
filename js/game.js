@@ -151,15 +151,6 @@ game.draw_arrows = function() {
    Math.PI*2, false);
    uppercontext.closePath();
    uppercontext.stroke();
-
-   //draw left arrow
-    //uppercontext.drawImage(left, 0, 0, 500, 500, center_x - cellSide * 4, center_y - cellSide, cellSide * 2, cellSide * 2);
-   //drawing the right arrow 
-    //uppercontext.drawImage(right, 0, 0, 500, 500, center_x + cellSide * 2, center_y - cellSide, cellSide * 2, cellSide * 2);
-   //drawing the up arrow
-    //uppercontext.drawImage(up, 0, 0, 500, 500, center_x - cellSide, center_y - cellSide * 4, cellSide * 2, cellSide * 2);
-   //drawing the down arrow
-    //uppercontext.drawImage(down, 0, 0, 500, 500, center_x - cellSide, center_y + cellSide * 2, cellSide * 2, cellSide * 2); 
    
    //left triangle
    uppercontext.moveTo(center_x - 2.5 * cellSide, center_y - 2 * cellSide);
@@ -534,7 +525,7 @@ game.hero_moving = function(event) {
  
 //moving the player with arrows on upper canvas
 uppercanvas.addEventListener('mousedown', game.hero_moving);
-uppercanvas.addEventListener('touchstart', game.hero_moving);
+uppercanvas.addEventListener('touchstart', function(e){e.preventDefault(); game.hero_moving();});
 
 uppercanvas.addEventListener('mouseup', function(event){
   game.walking = false;
@@ -546,6 +537,7 @@ uppercanvas.addEventListener('mouseup', function(event){
 })
 
 uppercanvas.addEventListener('touchend', function(event){
+	event.preventDefault();
   game.walking = false;
   clearTimeout(interval);
   inputStates.left = false;
