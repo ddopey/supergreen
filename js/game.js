@@ -524,9 +524,9 @@ game.hero_moving = function(event) {
 }
  
 //moving the player with arrows on upper canvas
-//uppercanvas.addEventListener('mousedown', game.hero_moving);
-uppercanvas.addEventListener('touchstart', game.hero_moving);
-/*
+uppercanvas.addEventListener('mousedown', game.hero_moving);
+//uppercanvas.addEventListener('touchstart', game.hero_moving);
+
 uppercanvas.addEventListener('mouseup', function(event){
   game.walking = false;
   clearTimeout(interval);
@@ -535,7 +535,7 @@ uppercanvas.addEventListener('mouseup', function(event){
   inputStates.up = false;
   inputStates.down = false;
 })
-*/
+/*
 uppercanvas.addEventListener('touchend', function(event){
   game.walking = false;
   clearTimeout(interval);
@@ -544,7 +544,7 @@ uppercanvas.addEventListener('touchend', function(event){
   inputStates.up = false;
   inputStates.down = false;
 })
-
+*/
 game.movehandler = function () {
   if(arrows.draggable) {
     const rect = uppercanvas.getBoundingClientRect();
