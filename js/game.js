@@ -513,7 +513,7 @@ game.hero_moving = function(event) {
     game.updateposition();
   }
 
-  //what happens if we pres the down arrow
+  //what happens if we press the down arrow
   if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > (arrows.y + 6 * cellSide))&&(y < (arrows.y + 9 * cellSide))) {
     inputStates.down = true;
     game.updateposition();
@@ -524,9 +524,9 @@ game.hero_moving = function(event) {
 }
  
 //moving the player with arrows on upper canvas
-uppercanvas.addEventListener('mousedown', game.hero_moving);
-uppercanvas.addEventListener('touchstart', function(e){e.preventDefault(); game.hero_moving();});
-
+//uppercanvas.addEventListener('mousedown', game.hero_moving);
+uppercanvas.addEventListener('touchstart', game.hero_moving);
+/*
 uppercanvas.addEventListener('mouseup', function(event){
   game.walking = false;
   clearTimeout(interval);
@@ -535,9 +535,8 @@ uppercanvas.addEventListener('mouseup', function(event){
   inputStates.up = false;
   inputStates.down = false;
 })
-
+*/
 uppercanvas.addEventListener('touchend', function(event){
-	event.preventDefault();
   game.walking = false;
   clearTimeout(interval);
   inputStates.left = false;
