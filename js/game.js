@@ -42,6 +42,10 @@ let context = canvas.getContext("2d");
 let newcanvas = document.querySelector("#newcanvas");
 var newcontext = newcanvas.getContext("2d");
 
+//uppermost canvas
+let uppercanvas = document.querySelector("#uppercanvas");
+let uppercontext = uppercanvas.getContext("2d");
+
 //variable to keep the dimension of one cell of the map
 let cellSide = 0;
 
@@ -57,6 +61,10 @@ else {
 	canvas.style.top = newcanvas.style.top = (h - w)/2+"px";
 	canvas.style.left = newcanvas.style.left = 0;
 }
+
+//uppermost canvas
+uppercanvas.width = w;
+uppercanvas.height = h;
 
 //insert from beholder
 
@@ -125,17 +133,74 @@ game.coll_detection = function(x1, y1, width1, height1, x2, y2, width2, height2)
   return false;
 }
 
+//the object for keeping the arrows
+let arrows = new Rectangle(uppercanvas.width/2 - 4.5 * cellSide, uppercanvas.height/2 - 4.5 * cellSide, 9 * cellSide, 9 * cellSide);
+arrows.draggable = false;
+
+  //uppercanvas draw function
+game.draw_arrows = function() {
+  //center of the canvas
+  let center_x = arrows.x + 4.5 * cellSide;
+  let center_y = arrows.y + 4.5 * cellSide;
+  //draw center cirlce 
+   uppercontext.strokeStyle = '#FFFFFF';
+   uppercontext.lineWidth = 2;
+   uppercontext.beginPath();
+   uppercontext.arc(center_x, center_y,
+   cellSide * 1.5, 0,
+   Math.PI*2, false);
+   uppercontext.closePath();
+   uppercontext.stroke();
+
+   //draw left arrow
+    //uppercontext.drawImage(left, 0, 0, 500, 500, center_x - cellSide * 4, center_y - cellSide, cellSide * 2, cellSide * 2);
+   //drawing the right arrow 
+    //uppercontext.drawImage(right, 0, 0, 500, 500, center_x + cellSide * 2, center_y - cellSide, cellSide * 2, cellSide * 2);
+   //drawing the up arrow
+    //uppercontext.drawImage(up, 0, 0, 500, 500, center_x - cellSide, center_y - cellSide * 4, cellSide * 2, cellSide * 2);
+   //drawing the down arrow
+    //uppercontext.drawImage(down, 0, 0, 500, 500, center_x - cellSide, center_y + cellSide * 2, cellSide * 2, cellSide * 2); 
+   
+   //left triangle
+   uppercontext.moveTo(center_x - 2.5 * cellSide, center_y - 2 * cellSide);
+   uppercontext.lineTo(center_x - 2.5 * cellSide, center_y + 2 * cellSide);
+   uppercontext.lineTo(center_x - 4.5 * cellSide, center_y);
+   uppercontext.closePath();
+   uppercontext.stroke();
+
+   //right triangle
+   uppercontext.moveTo(center_x + 4.5 * cellSide, center_y);
+   uppercontext.lineTo(center_x + 2.5 * cellSide,  center_y + 2 * cellSide);
+   uppercontext.lineTo(center_x + 2.5 * cellSide, center_y - 2 * cellSide);
+   uppercontext.closePath();
+   uppercontext.stroke();
+
+   //upper triangle
+   uppercontext.moveTo(center_x - 2 * cellSide, center_y - 2.5 * cellSide);
+   uppercontext.lineTo(center_x, center_y - 4.5 * cellSide);
+   uppercontext.lineTo(center_x + 2 * cellSide, center_y - 2.5 * cellSide);
+   uppercontext.closePath();
+   uppercontext.stroke();
+
+   //lower triangle
+   uppercontext.moveTo(center_x, center_y + 4.5 * cellSide);
+   uppercontext.lineTo(center_x - 2 * cellSide, center_y + 2.5 * cellSide);
+   uppercontext.lineTo(center_x + 2 * cellSide, center_y + 2.5 * cellSide);
+   uppercontext.closePath();
+   uppercontext.stroke();
+
+   //the word drag
+   if(arrows.draggable) {
+    uppercontext.font = `${cellSide* 0.7}px Arial Black`;
+    uppercontext.fillStyle = 'white';
+    uppercontext.fillText('DRAG', arrows.x + 3.4 * cellSide, arrows.y + 4.75 * cellSide);
+   }
+   
+}
+
 game.draw_player = function() {
    //drawing the player on the front canvas
    newcontext.drawImage(dwarf1, 0, 0, 200, 185, player.x, player.y, player.width, player.height);
-   //drawing the left arrow near the player
-   newcontext.drawImage(left, 0, 0, 500, 500, player.x - cellSide, player.y, player.width, player.height);
-   //drawing the right arrow near the player
-   newcontext.drawImage(right, 0, 0, 500, 500, player.x + player.width + player.width/4, player.y, player.width, player.height);
-   //drawing the up arrow near the player
-   newcontext.drawImage(up, 0, 0, 500, 500, player.x, player.y - cellSide, player.width, player.height);
-   //drawing the down arrow
-   newcontext.drawImage(down, 0, 0, 500, 500, player.x, player.y + cellSide, player.width, player.height);
 }
 
 game.draw_arr = function(arr, image, image_x, image_y) {
@@ -192,6 +257,8 @@ game.draw_initial = function () {
    game.clear_fog();
    //drawing the player
    game.draw_player();
+   //draw the center round
+   game.draw_arrows();
 }
 
 game.init = function () {
@@ -256,6 +323,8 @@ function startlevel() {
 		document.getElementById('winscreen').style.display = "none";
 		canvas.style.display = "block";
 		newcanvas.style.display = "block";
+    uppercanvas.style.display = "block";
+    game.music();
 		//drawing the initial details
 		game.init();
     if(game.blind === 'true') {
@@ -271,12 +340,17 @@ function reload() {
 }
 
 function resize_window () {
+  //uppercontext.clearRect(arrows.x - cellSide/4, arrows.y - cellSide/4, arrows.width + cellSide/2, arrows.height + cellSide/2);
 
   const oldcell = cellSide;
   let ratio;
 
   w = window.innerWidth;
   h = window.innerHeight;
+
+  //uppercanvas
+  uppercanvas.width = w;
+  uppercanvas.height = h;
 
   if (h < w) {
   cellSide = h/25;
@@ -312,6 +386,10 @@ canvas.style.left = newcanvas.style.left = 0;
   player.height *= ratio;
 
   game.draw_initial();
+  uppercontext.clearRect(arrows.x - cellSide/4, arrows.y - cellSide/4, arrows.width + cellSide/2, arrows.height + cellSide/2);
+  arrows.x = arrows.x * ratio;
+  arrows.y = arrows.y * ratio;
+  game.draw_arrows();
 
 }
 
@@ -348,14 +426,16 @@ Array.from(document.querySelectorAll('.text')).forEach(el => el.style.fontSize =
     this.style.display = "none";
     clearTimeout(Animation);
     document.getElementById('hard').style.display = "block";
+    document.getElementById('easy').style.display = "none";
   });
   
   document.getElementById('hard').addEventListener('click', function() {
     localStorage.setItem('blind', 'true');
     game.blind = 'true';
-    this.style.display = "none";
-    game.animate();
+    //this.style.display = "none";
     document.getElementById('easy').style.display = "block";
+    document.getElementById('hard').style.display = "none";
+    game.animate();
   });
 
 	document.getElementById('startscreen').addEventListener('click', startlevel);
@@ -378,12 +458,16 @@ document.getElementById('rel').addEventListener('click', function() {
     document.getElementById('menu').style.display = 'none';
     canvas.style.display = "block";
     newcanvas.style.display = "block";
+    uppercanvas.style.display = "block";
     game.menuclicked = false;
   } else {
     game.menuclicked = true;
     canvas.style.display = "none";
     newcanvas.style.display = "none";
     document.getElementById('menu').style.display = 'block';
+    document.getElementById('hard').style.display = 'none';
+    document.getElementById('easy').style.display = 'none';
+    uppercanvas.style.display = "none";
   }
 });
 
@@ -396,42 +480,92 @@ document.getElementById('reset').addEventListener('click', function() {
   reload();
 });
 
-//moving the player with mouseclick 
+game.walking = false;
+let interval;
 
-newcanvas.addEventListener('mousedown', function(event) {
-	const rect = newcanvas.getBoundingClientRect();
-	const x = event.clientX - rect.left;
-	const y = event.clientY - rect.top;
-	if((x < player.x)&&(x > (player.x - cellSide))&&(y > player.y)&&(y < (player.y + cellSide))) {
-		inputStates.left = true;
-	}
-	else if ((x > (player.x + player.width))&&(x < (player.x + player.width + cellSide))&&(y > player.y)&&(y < (player.y + cellSide))) {
-		inputStates.right = true;
-	}
-	else if ((x > player.x)&&(x < (player.x + player.width))&&(y < player.y)&&(y > (player.y - cellSide))) {
-		inputStates.up = true;
-	}
-	else if ((x > player.x)&&(x < (player.x + player.width))&&(y > (player.y + player.height))&&(y < (player.y + player.height + cellSide))) {
-		inputStates.down = true;
-	}
-   game.updateposition();
-	 
-}, false);
+game.hero_moving = function(event) {
+  game.walking = true;
+  const rect = uppercanvas.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+  if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&( y < (arrows.y + 6 * cellSide))) {
+    if(arrows.draggable) {
+      arrows.draggable = false;
+      uppercontext.clearRect(arrows.x + 3.2 * cellSide, (arrows.y + 4.15 * cellSide), cellSide * 2.5, cellSide);
+    } else {  
+      
+      arrows.draggable = true;
+      uppercontext.font = `${cellSide * 0.7}px Arial Black`;
+      uppercontext.fillStyle = 'white';
+      uppercontext.fillText('DRAG', arrows.x + 3.4 * cellSide, arrows.y + 4.75 * cellSide);
+      
+    }
+    game.walking = false;
+  }
+  //here goes the description of what happens if we press the arrows
 
+  //what happens if we press the left arrow
+  if((x > arrows.x)&&(x < (arrows.x + 3 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&(y < (arrows.y + 6 * cellSide))) {
+    inputStates.left = true;
+    game.updateposition();
+  }
 
-//if the left click button is released change the states object
-newcanvas.addEventListener('mouseup', function(){
-   //clearInterval(interval);
-	inputStates.left = false;
-	inputStates.right = false;
-	inputStates.up = false;
-	inputStates.down = false;
-	
+  //what happens if we press the right arrow
+  if((x > (arrows.x + 6 * cellSide))&&(x < (arrows.x + 9 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&(y < (arrows.y + 6 * cellSide))) {
+    inputStates.right = true;
+    game.updateposition();
+  }
+
+  //what happens if we press the up arrow
+  if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > arrows.y)&&(y < (arrows.y + 3 * cellSide))) {
+    inputStates.up = true;
+    game.updateposition();
+  }
+
+  //what happens if we pres the down arrow
+  if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > (arrows.y + 6 * cellSide))&&(y < (arrows.y + 9 * cellSide))) {
+    inputStates.down = true;
+    game.updateposition();
+  }
+  if(game.walking) {
+    interval = setTimeout(game.hero_moving.bind(null, event), 60);
+  }
+}
+ 
+//moving the player with arrows on upper canvas
+uppercanvas.addEventListener('mousedown', game.hero_moving);
+
+uppercanvas.addEventListener('mouseup', function(event){
+  game.walking = false;
+  clearTimeout(interval);
+  inputStates.left = false;
+  inputStates.right = false;
+  inputStates.up = false;
+  inputStates.down = false;
 })
+
+game.movehandler = function () {
+  if(arrows.draggable) {
+    const rect = uppercanvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    uppercontext.clearRect(arrows.x - cellSide/4, arrows.y - cellSide/4, arrows.width + cellSide/2, arrows.height + cellSide/2);
+    arrows.x = x - 4.5 * cellSide;
+    arrows.y = y - 4.5 * cellSide;
+    //set the boundaries
+    if(arrows.x < 0) { arrows.x = 0; }
+    if((arrows.x + arrows.width) > uppercanvas.width) {arrows.x = uppercanvas.width - arrows.width}
+    if(arrows.y < 0) {arrows.y = 0}
+    if((arrows.y + arrows.height) > uppercanvas.height) {arrows.y = uppercanvas.height - arrows.height}
+    game.draw_arrows();
+  }
+}
+
+uppercanvas.addEventListener('touchmove', game.movehandler);
+uppercanvas.addEventListener('mousemove', game.movehandler);
 
 //keyboard input events 
 window.addEventListener('keydown', function(event){
-//event.preventDefault();
 if (event.keyCode === 37) {
 inputStates.left = true;
           } 
@@ -722,13 +856,11 @@ game.animate = function () {
                 document.getElementById('gameover').play();
                 document.getElementById('gameover').onended = function(){
                 const num = (Number(localStorage.getItem('level')));
-                //localStorage.clear();
                 localStorage.setItem('level', num);
                 reload();
                }
               } else {
                   const num = (Number(localStorage.getItem('level')));
-                  //localStorage.clear();
                   localStorage.setItem('level', num);
                   reload();
               }
