@@ -496,35 +496,50 @@ game.hero_moving = game.hero_moving.bind(null, event)
   }
   //here goes the description of what happens if we press the arrows
 
-  //what happens if we press the left arrow
+   //what happens if we press the left arrow
   if((x > arrows.x)&&(x < (arrows.x + 3 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&(y < (arrows.y + 6 * cellSide))) {
     inputStates.left = true;
     game.updateposition();
+    interval = setInterval(function(){
+      inputStates.left = true;
+      game.updateposition();
+    }, 60);
   }
 
   //what happens if we press the right arrow
-   else if((x > (arrows.x + 6 * cellSide))&&(x < (arrows.x + 9 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&(y < (arrows.y + 6 * cellSide))) {
+  if((x > (arrows.x + 6 * cellSide))&&(x < (arrows.x + 9 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&(y < (arrows.y + 6 * cellSide))) {
     inputStates.right = true;
     game.updateposition();
+      interval = setInterval(function(){
+      inputStates.right = true;
+      game.updateposition();
+    }, 60);
   }
 
   //what happens if we press the up arrow
-  else if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > arrows.y)&&(y < (arrows.y + 3 * cellSide))) {
+  if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > arrows.y)&&(y < (arrows.y + 3 * cellSide))) {
     inputStates.up = true;
     game.updateposition();
+      interval = setInterval(function(){
+      inputStates.up = true;
+      game.updateposition();
+    }, 60);
   }
 
-  //what happens if we press the down arrow
-   else if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > (arrows.y + 6 * cellSide))&&(y < (arrows.y + 9 * cellSide))) {
+  //what happens if we pres the down arrow
+  if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > (arrows.y + 6 * cellSide))&&(y < (arrows.y + 9 * cellSide))) {
     inputStates.down = true;
     game.updateposition();
+      interval = setInterval(function(){
+      inputStates.down = true;
+      game.updateposition();
+    }, 60);
   }
-	
+/*	
   if(game.walking) {
-   // interval = setTimeout(game.hero_moving.bind(null, event), 60);
-	interval = setTimeout(game.hero_moving, 60);
+   interval = setTimeout(game.hero_moving.bind(null, event), 60);
   }
-	
+*/
 }
  
 //moving the player with arrows on upper canvas
@@ -533,7 +548,7 @@ uppercanvas.addEventListener('mousedown', game.hero_moving);
 
 uppercanvas.addEventListener('mouseup', function(event){
   game.walking = false;
-  clearTimeout(interval);
+  clearInterval(interval);
   inputStates.left = false;
   inputStates.right = false;
   inputStates.up = false;
