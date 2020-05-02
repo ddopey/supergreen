@@ -522,9 +522,8 @@ game.hero_moving = function(event) {
 let func = game.hero_moving.bind(null, event);
 	
   if(game.walking) {
-	  setTimeout(alert('it works'), 60);
    //interval = setTimeout(function(){game.hero_moving.bind(null, event)}, 60);
-	// interval = setTimeout(func, 60);
+	setTimeout(func, 60);
   }
 
 }
