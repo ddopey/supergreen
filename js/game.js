@@ -475,7 +475,7 @@ game.walking = false;
 let interval;
 
 game.hero_moving = function(event) {
-  setTimeout(function(){alert('timeout works!')}, 500, false);
+  //setTimeout(function(){alert('timeout works!')}, 500, false);
   game.walking = true;
   const rect = uppercanvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
@@ -497,31 +497,31 @@ game.hero_moving = function(event) {
   //here goes the description of what happens if we press the arrows
 
    //what happens if we press the left arrow
-  if((x > arrows.x)&&(x < (arrows.x + 3 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&(y < (arrows.y + 6 * cellSide))) {
+  else if((x > arrows.x)&&(x < (arrows.x + 3 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&(y < (arrows.y + 6 * cellSide))) {
     inputStates.left = true;
     game.updateposition();
   }
 
   //what happens if we press the right arrow
-  if((x > (arrows.x + 6 * cellSide))&&(x < (arrows.x + 9 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&(y < (arrows.y + 6 * cellSide))) {
+  else if((x > (arrows.x + 6 * cellSide))&&(x < (arrows.x + 9 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&(y < (arrows.y + 6 * cellSide))) {
     inputStates.right = true;
     game.updateposition();
   }
 
   //what happens if we press the up arrow
-  if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > arrows.y)&&(y < (arrows.y + 3 * cellSide))) {
+  else if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > arrows.y)&&(y < (arrows.y + 3 * cellSide))) {
     inputStates.up = true;
     game.updateposition();
   }
 
   //what happens if we pres the down arrow
-  if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > (arrows.y + 6 * cellSide))&&(y < (arrows.y + 9 * cellSide))) {
+  else if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > (arrows.y + 6 * cellSide))&&(y < (arrows.y + 9 * cellSide))) {
     inputStates.down = true;
     game.updateposition();
   }
 	
   if(game.walking) {
-   interval = setTimeout(game.hero_moving.bind(null, event), 60);
+   interval = setTimeout(function(){game.hero_moving.bind(null, event)}, 60);
   }
 
 }
