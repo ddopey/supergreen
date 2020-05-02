@@ -475,6 +475,7 @@ game.walking = false;
 let interval;
 
 game.hero_moving = function(event) {
+game.hero_moving = game.hero_moving.bind(null, event)
   game.walking = true;
   const rect = uppercanvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
@@ -499,18 +500,18 @@ game.hero_moving = function(event) {
   if((x > arrows.x)&&(x < (arrows.x + 3 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&(y < (arrows.y + 6 * cellSide))) {
     inputStates.left = true;
     game.updateposition();
-	 if(game.walking) {
+	/* if(game.walking) {
     interval = setTimeout(game.hero_moving.bind(null, event), 60);
-  }
+  }*/
   }
 
   //what happens if we press the right arrow
    else if((x > (arrows.x + 6 * cellSide))&&(x < (arrows.x + 9 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&(y < (arrows.y + 6 * cellSide))) {
     inputStates.right = true;
     game.updateposition();
-	     if(game.walking) {
+	  /*   if(game.walking) {
     interval = setTimeout(game.hero_moving.bind(null, event), 60);
-  }
+  }*/
   }
 
   //what happens if we press the up arrow
@@ -518,23 +519,24 @@ game.hero_moving = function(event) {
     inputStates.up = true;
     game.updateposition();
 	 if(game.walking) {
-    interval = setTimeout(game.hero_moving.bind(null, event), 60);
-  }
+   /* interval = setTimeout(game.hero_moving.bind(null, event), 60);
+  }*/
   }
 
   //what happens if we press the down arrow
    else if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > (arrows.y + 6 * cellSide))&&(y < (arrows.y + 9 * cellSide))) {
     inputStates.down = true;
     game.updateposition();
-	     if(game.walking) {
+	 /*    if(game.walking) {
     interval = setTimeout(game.hero_moving.bind(null, event), 60);
+  }*/
   }
-  }
-	/*
+	
   if(game.walking) {
-    interval = setTimeout(game.hero_moving.bind(null, event), 60);
+   // interval = setTimeout(game.hero_moving.bind(null, event), 60);
+	interval = setTimeout(game.hero_moving, 60);
   }
-	*/
+	
 }
  
 //moving the player with arrows on upper canvas
