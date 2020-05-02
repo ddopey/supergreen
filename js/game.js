@@ -472,7 +472,7 @@ document.getElementById('reset').addEventListener('click', function() {
 });
 
 game.walking = false;
-let interval;
+let timer;
 
 game.hero_moving = function(event) {
   game.walking = true;
@@ -523,7 +523,7 @@ let func = game.hero_moving.bind(null, event);
 	
   if(game.walking) {
    //interval = setTimeout(function(){game.hero_moving.bind(null, event)}, 60);
-	setTimeout(func, 60);
+	timer = setTimeout(func, 60);
   }
 
 }
@@ -534,7 +534,7 @@ uppercanvas.addEventListener('mousedown', game.hero_moving);
 
 uppercanvas.addEventListener('mouseup', function(event){
   game.walking = false;
-  //clearTimeout(interval);
+  clearTimeout(timer);
   inputStates.left = false;
   inputStates.right = false;
   inputStates.up = false;
