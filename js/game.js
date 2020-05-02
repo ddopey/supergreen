@@ -520,7 +520,7 @@ game.hero_moving = function(event) {
   }
 	
   if(game.walking) {
-   interval = setTimeout(game.hero_moving.bind(null, event), 300);
+   interval = window.setTimeout(game.hero_moving.bind(null, event), 60);
   }
 
 }
