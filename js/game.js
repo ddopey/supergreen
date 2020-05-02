@@ -524,12 +524,13 @@ let func = game.hero_moving.bind(null, event);
   if(game.walking) {
    //interval = setTimeout(function(){game.hero_moving.bind(null, event)}, 60);
 	timer = setTimeout(func, 60);
+	  alert(timer);
   }
 
 }
  
 //moving the player with arrows on upper canvas
-uppercanvas.addEventListener('mousedown', game.hero_moving);
+uppercanvas.addEventListener('mousedown', game.hero_moving, false);
 //uppercanvas.addEventListener('touchstart', game.hero_moving);
 
 uppercanvas.addEventListener('mouseup', function(event){
