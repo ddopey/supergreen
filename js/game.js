@@ -534,7 +534,7 @@ uppercanvas.addEventListener('mousedown', game.hero_moving);
 
 uppercanvas.addEventListener('mouseup', function(event){
   game.walking = false;
-  clearTimeout(interval);
+  //clearTimeout(interval);
   inputStates.left = false;
   inputStates.right = false;
   inputStates.up = false;
