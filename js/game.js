@@ -475,7 +475,6 @@ game.walking = false;
 let interval;
 
 game.hero_moving = function(event) {
-  //setTimeout(function(){alert('timeout works!')}, 500, false);
   game.walking = true;
   const rect = uppercanvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
