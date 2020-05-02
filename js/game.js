@@ -519,11 +519,12 @@ game.hero_moving = function(event) {
     game.updateposition();
   }
 
-let func = game.hero_moving.bind(null, event);
+
 	
   if(game.walking) {
 	//timer = setTimeout(func, 60);
 	 // timer = setTimeout(function(){game.hero_moving(event);}, 60);
+	let func = game.hero_moving.bind(null, event);
 	setTimeout(func, 60);
   }
 
