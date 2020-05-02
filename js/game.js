@@ -475,7 +475,6 @@ game.walking = false;
 let interval;
 
 game.hero_moving = function(event) {
-//game.hero_moving = game.hero_moving.bind(null, event)
   game.walking = true;
   const rect = uppercanvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
@@ -500,46 +499,30 @@ game.hero_moving = function(event) {
   if((x > arrows.x)&&(x < (arrows.x + 3 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&(y < (arrows.y + 6 * cellSide))) {
     inputStates.left = true;
     game.updateposition();
-    interval = setInterval(function(){
-      inputStates.left = true;
-      game.updateposition();
-    }, 60);
   }
 
   //what happens if we press the right arrow
   if((x > (arrows.x + 6 * cellSide))&&(x < (arrows.x + 9 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&(y < (arrows.y + 6 * cellSide))) {
     inputStates.right = true;
     game.updateposition();
-      interval = setInterval(function(){
-      inputStates.right = true;
-      game.updateposition();
-    }, 60);
   }
 
   //what happens if we press the up arrow
   if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > arrows.y)&&(y < (arrows.y + 3 * cellSide))) {
     inputStates.up = true;
     game.updateposition();
-      interval = setInterval(function(){
-      inputStates.up = true;
-      game.updateposition();
-    }, 60);
   }
 
   //what happens if we pres the down arrow
   if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > (arrows.y + 6 * cellSide))&&(y < (arrows.y + 9 * cellSide))) {
     inputStates.down = true;
     game.updateposition();
-      interval = setInterval(function(){
-      inputStates.down = true;
-      game.updateposition();
-    }, 60);
   }
-/*	
+	
   if(game.walking) {
-   interval = setTimeout(game.hero_moving.bind(null, event), 60);
+   interval = setTimeout(game.hero_moving.bind(null, event), 300);
   }
-*/
+
 }
  
 //moving the player with arrows on upper canvas
@@ -548,7 +531,7 @@ uppercanvas.addEventListener('mousedown', game.hero_moving);
 
 uppercanvas.addEventListener('mouseup', function(event){
   game.walking = false;
-  clearInterval(interval);
+  clearTimeout(interval);
   inputStates.left = false;
   inputStates.right = false;
   inputStates.up = false;
