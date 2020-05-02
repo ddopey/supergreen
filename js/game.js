@@ -518,9 +518,12 @@ game.hero_moving = function(event) {
     inputStates.down = true;
     game.updateposition();
   }
+
+let func = game.hero_moving.bind(null, event);
 	
   if(game.walking) {
-   interval = setTimeout(function(){game.hero_moving.bind(null, event)}, 60);
+   //interval = setTimeout(function(){game.hero_moving.bind(null, event)}, 60);
+	 interval = setTimeout(func, 60);
   }
 
 }
