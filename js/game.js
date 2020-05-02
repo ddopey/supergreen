@@ -475,7 +475,7 @@ game.walking = false;
 let interval;
 
 game.hero_moving = function(event) {
-game.hero_moving = game.hero_moving.bind(null, event)
+//game.hero_moving = game.hero_moving.bind(null, event)
   game.walking = true;
   const rect = uppercanvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
