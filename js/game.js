@@ -518,14 +518,14 @@ game.hero_moving = function(event) {
     game.updateposition();
   }
 
-  //what happens if we pres the down arrow
+  //what happens if we press the down arrow
   else if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > (arrows.y + 6 * cellSide))&&(y < (arrows.y + 9 * cellSide))) {
     inputStates.down = true;
     game.updateposition();
   }
 	  
   if(game.walking) {
-	timer = setTimeout(function(){counter += 1; game.hero_moving.bind(null, event);}, 60);	  
+	setTimeout(function(){counter += 1; game.hero_moving.bind(null, event);}, 60);	  
   }
 }
  
