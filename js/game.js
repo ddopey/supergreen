@@ -521,13 +521,10 @@ game.hero_moving = function(event) {
     inputStates.down = true;
     game.updateposition();
   }
-
-
-	
- // if(game.walking) {
-	//timer = window.setTimeout(game.hero_moving.bind(null, event), 60);
 	  
-//  }
+  if(game.walking) {
+	timer = setTimeout(game.hero_moving.bind(null, event), 33);	  
+  }
 
 }
  
@@ -537,7 +534,7 @@ window.addEventListener('mousedown', game.hero_moving, false);
 
 window.addEventListener('mouseup', function(event){
   game.walking = false;
-  window.clearTimeout(timer);
+  clearTimeout(timer);
   inputStates.left = false;
   inputStates.right = false;
   inputStates.up = false;
@@ -935,7 +932,4 @@ game.animate = function () {
             }
          });
       }
-	 if(game.walking) {
-	timer = window.setTimeout(game.updateposition, 60);
-}
    }
