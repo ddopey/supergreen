@@ -477,6 +477,8 @@ document.getElementById('reset').addEventListener('click', function() {
   reload();
 });
 
+let counter = 0;
+	
 game.hero_moving = function(event) {
   game.walking = true;
   const rect = uppercanvas.getBoundingClientRect();
@@ -523,7 +525,7 @@ game.hero_moving = function(event) {
   }
 	  
   if(game.walking) {
-	timer = setTimeout(game.hero_moving.bind(null, event), 60);	  
+	timer = setTimeout(function(){counter += 1; game.hero_moving.bind(null, event);}, 60);	  
   }
 }
  
@@ -534,6 +536,7 @@ window.addEventListener('mousedown', game.hero_moving, false);
 window.addEventListener('mouseup', function(event){
   game.walking = false;
   clearTimeout(timer);
+	alert(counter);
   inputStates.left = false;
   inputStates.right = false;
   inputStates.up = false;
