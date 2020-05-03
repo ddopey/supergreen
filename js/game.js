@@ -526,7 +526,7 @@ game.hero_moving = function(event) {
 	 // timer = setTimeout(function(){game.hero_moving(event);}, 60);
 	//let func = game.hero_moving.bind(null, event);
 	//setTimeout(func, 60);
-	timer = setInterval(game.updateposition, 60);
+	(() => {timer = setInterval(game.updateposition, 60)})();
 	  
   }
 
