@@ -524,8 +524,10 @@ game.hero_moving = function(event) {
   if(game.walking) {
 	//timer = setTimeout(func, 60);
 	 // timer = setTimeout(function(){game.hero_moving(event);}, 60);
-	let func = game.hero_moving.bind(null, event);
-	setTimeout(func, 60);
+	//let func = game.hero_moving.bind(null, event);
+	//setTimeout(func, 60);
+	timer = setTimeout(game.updateposition, 60);
+	  
   }
 
 }
@@ -536,10 +538,7 @@ uppercanvas.addEventListener('mousedown', game.hero_moving, false);
 
 uppercanvas.addEventListener('mouseup', function(event){
   game.walking = false;
-  //clearTimeout(timer);
-	for(let i=0; i < 100; i++) {
-		clearTimeout(i);
-	}
+  clearTimeout(timer);
   inputStates.left = false;
   inputStates.right = false;
   inputStates.up = false;
