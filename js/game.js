@@ -502,30 +502,55 @@ game.hero_moving = function(event) {
   else if((x > arrows.x)&&(x < (arrows.x + 3 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&(y < (arrows.y + 6 * cellSide))) {
     inputStates.left = true;
     game.updateposition();
+	  
+	  	  if(game.walking) {
+	timer = setInterval(function () {inputStates.left = true; game.updateposition()}, 60)
+	} else {
+	clearInterval(timer);
+	}
   }
 
   //what happens if we press the right arrow
   else if((x > (arrows.x + 6 * cellSide))&&(x < (arrows.x + 9 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&(y < (arrows.y + 6 * cellSide))) {
     inputStates.right = true;
     game.updateposition();
+	  
+	  if(game.walking) {
+	timer = setInterval(function () {inputStates.right = true; game.updateposition()}, 60)
+	} else {
+	clearInterval(timer);
+	}
+	  
   }
 
   //what happens if we press the up arrow
   else if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > arrows.y)&&(y < (arrows.y + 3 * cellSide))) {
     inputStates.up = true;
     game.updateposition();
+	  
+	if(game.walking) {
+	timer = setInterval(function () {inputStates.up = true; game.updateposition()}, 60)
+	} else {
+	clearInterval(timer);
+	}
+	  
   }
 
   //what happens if we pres the down arrow
   else if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > (arrows.y + 6 * cellSide))&&(y < (arrows.y + 9 * cellSide))) {
     inputStates.down = true;
     game.updateposition();
+if(game.walking) {
+	timer = setInterval(function () {inputStates.down = true; game.updateposition()}, 60)
+	} else {
+	clearInterval(timer);
+	}
   }
-	  
+/*	  
   if(game.walking) {
-	timer = setTimeout(game.hero_moving.bind(null, event), 33);	  
+	timer = setTimeout(game.hero_moving.bind(null, event), 60);	  
   }
-
+*/
 }
  
 //moving the player with arrows on upper canvas
