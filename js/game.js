@@ -523,7 +523,7 @@ game.hero_moving = function(event) {
   }
 	  
   if(game.walking) {
-	setTimeout(game.hero_moving.bind(null, event), 60);	  
+	timer = setTimeout(game.hero_moving.bind(null, event), 60);	  
   }
 }
  
