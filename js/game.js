@@ -530,10 +530,10 @@ game.hero_moving = function(event) {
 }
  
 //moving the player with arrows on upper canvas
-window.addEventListener('mousedown', game.hero_moving, false);
+uppercanvas.addEventListener('mousedown', game.hero_moving, false);
 //uppercanvas.addEventListener('touchstart', game.hero_moving);
 
-window.addEventListener('mouseup', function(event){
+uppercanvas.addEventListener('mouseup', function(event){
   game.walking = false;
   clearTimeout(timer);
 	alert(counter);
