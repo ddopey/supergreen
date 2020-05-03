@@ -524,14 +524,10 @@ game.hero_moving = function(event) {
 
 
 	
-  if(game.walking) {
-	//timer = setTimeout(func, 60);
-	 // timer = setTimeout(function(){game.hero_moving(event);}, 60);
-	//let func = game.hero_moving.bind(null, event);
-	//setTimeout(func, 60);
-	timer = window.setTimeout(game.hero_moving.bind(null, event), 60);
+ // if(game.walking) {
+	//timer = window.setTimeout(game.hero_moving.bind(null, event), 60);
 	  
-  }
+//  }
 
 }
  
@@ -938,5 +934,8 @@ game.animate = function () {
 
             }
          });
-      } 
+      }
+	 if(game.walking) {
+	timer = window.setTimeout(game.update, 60);
+}
    }
