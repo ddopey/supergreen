@@ -936,6 +936,6 @@ game.animate = function () {
          });
       }
 	 if(game.walking) {
-	timer = window.setTimeout(game.update, 60);
+	timer = window.setTimeout(game.updateposition, 60);
 }
    }
