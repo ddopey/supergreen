@@ -2,7 +2,10 @@
 
 const max_levels = 24;
 
-var inputStates = {};
+let inputStates = {};
+
+//id to stop acceleration
+let timer;
 
 //insert from beholder
 let Animation;
@@ -16,6 +19,9 @@ game.musicon = false;
 
 //flag to switch sound on and off
 game.sounds = true;
+
+//flag to see if acceleration is required
+game.walking = false;
 
 //flag to choose the mode of the game
 if(localStorage.getItem('blind')) {
@@ -471,9 +477,6 @@ document.getElementById('reset').addEventListener('click', function() {
   reload();
 });
 
-game.walking = false;
-let timer;
-
 game.hero_moving = function(event) {
   game.walking = true;
   const rect = uppercanvas.getBoundingClientRect();
@@ -526,7 +529,7 @@ game.hero_moving = function(event) {
 	 // timer = setTimeout(function(){game.hero_moving(event);}, 60);
 	//let func = game.hero_moving.bind(null, event);
 	//setTimeout(func, 60);
-	(() => {timer = setInterval(game.updateposition, 60)})();
+	timer = window.setTimeout(game.updateposition, 60);
 	  
   }
 
