@@ -525,7 +525,7 @@ game.hero_moving = function(event) {
   }
 	  
   if(game.walking) {
-	setTimeout(function(){counter += 1; game.hero_moving.bind(null, event);}, 60);	  
+	timer = setTimeout(game.hero_moving.bind(null, event), 60);	  
   }
 }
  
@@ -536,7 +536,6 @@ uppercanvas.addEventListener('mousedown', game.hero_moving, false);
 uppercanvas.addEventListener('mouseup', function(event){
   game.walking = false;
   clearTimeout(timer);
-	alert(counter);
   inputStates.left = false;
   inputStates.right = false;
   inputStates.up = false;
