@@ -491,8 +491,8 @@ clearTimeout(temp)
 game.hero_moving = function(event) {
   game.walking = true;
   const rect = uppercanvas.getBoundingClientRect();
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
+  const x = event.touches[0].clientX - rect.left;
+  const y = event.touches[0].clientY - rect.top;
   if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > (arrows.y + 3 * cellSide))&&( y < (arrows.y + 6 * cellSide))) {
     if(arrows.draggable) {
       arrows.draggable = false;
