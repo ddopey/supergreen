@@ -488,8 +488,6 @@ clearTimeout(temp)
 }
 }
 	
-let counter = 0;
-	
 game.hero_moving = function(event) {
   game.walking = true;
   const rect = uppercanvas.getBoundingClientRect();
@@ -527,20 +525,18 @@ game.hero_moving = function(event) {
   else if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > arrows.y)&&(y < (arrows.y + 3 * cellSide))) {
     inputStates.up = true;
     game.updateposition();
-	setInterval(function(){ counter += 1;}, 1000);
   }
 
   //what happens if we press the down arrow
   else if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > (arrows.y + 6 * cellSide))&&(y < (arrows.y + 9 * cellSide))) {
     inputStates.down = true;
     game.updateposition();
-    press_down();
+   // press_down();
   }
-	/*
   if(game.walking) {
 	timer = setTimeout(game.hero_moving.bind(null, event), 60);	  
   }
-	*/
+
 }
  
 //moving the player with arrows on upper canvas
@@ -550,7 +546,6 @@ uppercanvas.addEventListener('mousedown', game.hero_moving, false);
 uppercanvas.addEventListener('mouseup', function(event){
   game.walking = false;
   clearTimeout(timer);
-	alert(counter);
   inputStates.left = false;
   inputStates.right = false;
   inputStates.up = false;
