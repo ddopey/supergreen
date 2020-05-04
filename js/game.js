@@ -552,7 +552,7 @@ function onTouchStart(e) {
 function onTouchEnd(e) {
     touchEndTimeStamp = e.timeStamp;
 
-    console.log(touchEndTimeStamp - touchStartTimeStamp);// in miliseconds
+    alert(touchEndTimeStamp - touchStartTimeStamp);// in miliseconds
 }
  
 //moving the player with arrows on upper canvas
