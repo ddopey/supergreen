@@ -538,6 +538,22 @@ game.hero_moving = function(event) {
   }
 
 }
+	
+var touchStartTimeStamp = 0;
+var touchEndTimeStamp   = 0;
+
+uppercanvas.addEventListener('touchstart', onTouchStart,false);
+uppercanvas.addEventListener('touchend', onTouchEnd,false);
+	
+function onTouchStart(e) {
+    touchStartTimeStamp = e.timeStamp;
+}
+
+function onTouchEnd(e) {
+    touchEndTimeStamp = e.timeStamp;
+
+    console.log(touchEndTimeStamp - touchStartTimeStamp);// in miliseconds
+}
  
 //moving the player with arrows on upper canvas
 uppercanvas.addEventListener('mousedown', game.hero_moving, false);
