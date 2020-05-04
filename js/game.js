@@ -531,6 +531,7 @@ game.hero_moving = function(event) {
   else if((x > (arrows.x + 3 * cellSide))&&(x < (arrows.x + 6 * cellSide))&&(y > (arrows.y + 6 * cellSide))&&(y < (arrows.y + 9 * cellSide))) {
     inputStates.down = true;
     game.updateposition();
+    press_down();
   }
 	/*
   if(game.walking) {
