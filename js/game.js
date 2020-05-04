@@ -337,7 +337,6 @@ function reload() {
 }
 
 function resize_window () {
-  //uppercontext.clearRect(arrows.x - cellSide/4, arrows.y - cellSide/4, arrows.width + cellSide/2, arrows.height + cellSide/2);
 
   const oldcell = cellSide;
   let ratio;
@@ -429,16 +428,15 @@ Array.from(document.querySelectorAll('.text')).forEach(el => el.style.fontSize =
   document.getElementById('hard').addEventListener('click', function() {
     localStorage.setItem('blind', 'true');
     game.blind = 'true';
-    //this.style.display = "none";
     document.getElementById('easy').style.display = "block";
     document.getElementById('hard').style.display = "none";
     game.animate();
   });
 
-	document.getElementById('startscreen').addEventListener('click', startlevel);
+  document.getElementById('startscreen').addEventListener('click', startlevel);
 
   //starting the game after clicking on the winscreen
-	document.getElementById('winscreen').addEventListener('click', reload);
+  document.getElementById('winscreen').addEventListener('click', reload);
 
 //starting the game after clicking on the winscreen
 document.getElementById('winner').addEventListener('click', reload);
@@ -538,29 +536,9 @@ game.hero_moving = function(event) {
   }
 
 }
-	
-/*
-	
-var touchStartTimeStamp = 0;
-var touchEndTimeStamp   = 0;
-
-uppercanvas.addEventListener('touchstart', onTouchStart,false);
-uppercanvas.addEventListener('touchend', onTouchEnd,false);
-	
-function onTouchStart(e) {
-    touchStartTimeStamp = e.timeStamp;
-}
-
-function onTouchEnd(e) {
-    touchEndTimeStamp = e.timeStamp;
-
-    alert(touchEndTimeStamp - touchStartTimeStamp);// in miliseconds
-}
-*/
  
 //moving the player with arrows on upper canvas
 uppercanvas.addEventListener('touchstart', game.hero_moving, false);
-//uppercanvas.addEventListener('touchstart', game.hero_moving);
 
 uppercanvas.addEventListener('touchend', function(event){
   game.walking = false;
@@ -570,16 +548,7 @@ uppercanvas.addEventListener('touchend', function(event){
   inputStates.up = false;
   inputStates.down = false;
 })
-/*
-uppercanvas.addEventListener('touchend', function(event){
-  game.walking = false;
-  clearTimeout(interval);
-  inputStates.left = false;
-  inputStates.right = false;
-  inputStates.up = false;
-  inputStates.down = false;
-})
-*/
+	
 game.movehandler = function () {
   if(arrows.draggable) {
     const rect = uppercanvas.getBoundingClientRect();
