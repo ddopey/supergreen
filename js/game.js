@@ -539,6 +539,8 @@ game.hero_moving = function(event) {
 
 }
 	
+/*
+	
 var touchStartTimeStamp = 0;
 var touchEndTimeStamp   = 0;
 
@@ -554,12 +556,13 @@ function onTouchEnd(e) {
 
     alert(touchEndTimeStamp - touchStartTimeStamp);// in miliseconds
 }
+*/
  
 //moving the player with arrows on upper canvas
-uppercanvas.addEventListener('mousedown', game.hero_moving, false);
+uppercanvas.addEventListener('touchstart', game.hero_moving, false);
 //uppercanvas.addEventListener('touchstart', game.hero_moving);
 
-uppercanvas.addEventListener('mouseup', function(event){
+uppercanvas.addEventListener('touchend', function(event){
   game.walking = false;
   clearTimeout(timer);
   inputStates.left = false;
