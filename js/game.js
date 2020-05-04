@@ -477,7 +477,16 @@ document.getElementById('reset').addEventListener('click', function() {
   reload();
 });
 
-let counter = 0;
+let temp;
+function press_down() {
+  inputStates.down = true;
+  game.updateposition();
+	if(game.walking){
+  temp = setTimeout(press_down, 60);
+} else {
+clearTimeout(temp)
+}
+}
 	
 game.hero_moving = function(event) {
   game.walking = true;
@@ -523,10 +532,11 @@ game.hero_moving = function(event) {
     inputStates.down = true;
     game.updateposition();
   }
-	  
+	/*
   if(game.walking) {
 	timer = setTimeout(game.hero_moving.bind(null, event), 60);	  
   }
+	*/
 }
  
 //moving the player with arrows on upper canvas
